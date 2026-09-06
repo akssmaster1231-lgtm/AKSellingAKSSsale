@@ -1,0 +1,6 @@
+{
+  "name": "AKSelling",
+  "description": "Official AKSelling store and supplier hub featuring royal Dark Forest Green (#0A3A1E / #052610) and Gold (#FFC107 / #FFD700) theme, customer storefront, catalog, real-time orders, and live tracking.",
+  "requestFramePermissions": ["geolocation", "microphone"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

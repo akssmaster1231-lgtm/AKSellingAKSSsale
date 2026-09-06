@@ -1,0 +1,287 @@
+{
+  "entities": {
+    "Product": {
+      "title": "Product",
+      "description": "E-commerce apparel product item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "price": { "type": "number" },
+        "originalPrice": { "type": "number" },
+        "discount": { "type": "string", "maxLength": 32 },
+        "rating": { "type": "number" },
+        "reviewCount": { "type": "number" },
+        "image": { "type": "string" },
+        "gallery": { "type": "array" },
+        "sizes": { "type": "array" },
+        "colors": { "type": "array" },
+        "fabric": { "type": "string", "maxLength": 128 },
+        "gsm": { "type": "number" },
+        "fit": { "type": "string", "maxLength": 128 },
+        "description": { "type": "string", "maxLength": 4096 },
+        "inStock": { "type": "boolean" },
+        "tag": { "type": "string", "maxLength": 64 },
+        "category": { "type": "string", "maxLength": 128 },
+        "bestseller": { "type": "boolean" },
+        "trending": { "type": "boolean" }
+      },
+      "required": ["id", "title", "price", "image", "sizes", "colors"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order with items, tracking, and payment details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "date": { "type": "string", "maxLength": 128 },
+        "items": { "type": "array" },
+        "totalAmount": { "type": "number" },
+        "status": { "type": "string", "maxLength": 64 },
+        "trackingStep": { "type": "number" },
+        "estimatedDelivery": { "type": "string", "maxLength": 256 },
+        "address": { "type": "string", "maxLength": 1024 },
+        "paymentMethod": { "type": "string", "maxLength": 128 },
+        "transactionId": { "type": "string", "maxLength": 128 },
+        "paymentGateway": { "type": "string", "maxLength": 128 },
+        "utrNumber": { "type": "string", "maxLength": 128 },
+        "paymentStatus": { "type": "string", "maxLength": 64 },
+        "trackingNumber": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["id", "items", "totalAmount", "status"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Customer account profile",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 256 },
+        "email": { "type": "string", "maxLength": 256 },
+        "phone": { "type": "string", "maxLength": 32 },
+        "gender": { "type": "string", "maxLength": 32 },
+        "avatar": { "type": "string" },
+        "memberTier": { "type": "string", "maxLength": 64 },
+        "superCoins": { "type": "number" }
+      },
+      "required": ["id", "email"]
+    },
+    "Address": {
+      "title": "Address",
+      "description": "Delivery address record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 256 },
+        "phone": { "type": "string", "maxLength": 32 },
+        "house": { "type": "string", "maxLength": 256 },
+        "street": { "type": "string", "maxLength": 512 },
+        "landmark": { "type": "string", "maxLength": 256 },
+        "city": { "type": "string", "maxLength": 128 },
+        "state": { "type": "string", "maxLength": 128 },
+        "pincode": { "type": "string", "maxLength": 16 },
+        "type": { "type": "string", "maxLength": 32 },
+        "isDefault": { "type": "boolean" }
+      },
+      "required": ["id", "name", "phone", "house", "street", "city", "state", "pincode"]
+    },
+    "SellerBankDetails": {
+      "title": "SellerBankDetails",
+      "description": "Bank account & UPI payout configuration for seller",
+      "type": "object",
+      "properties": {
+        "accountHolderName": { "type": "string", "maxLength": 256 },
+        "accountNumber": { "type": "string", "maxLength": 64 },
+        "ifscCode": { "type": "string", "maxLength": 32 },
+        "bankName": { "type": "string", "maxLength": 128 },
+        "upiId": { "type": "string", "maxLength": 128 },
+        "branch": { "type": "string", "maxLength": 128 },
+        "verified": { "type": "boolean" }
+      },
+      "required": ["accountHolderName", "accountNumber", "ifscCode"]
+    },
+    "PayoutRecord": {
+      "title": "PayoutRecord",
+      "description": "Seller payout transaction history",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "date": { "type": "string", "maxLength": 128 },
+        "amount": { "type": "number" },
+        "method": { "type": "string", "maxLength": 64 },
+        "destination": { "type": "string", "maxLength": 256 },
+        "status": { "type": "string", "maxLength": 64 },
+        "utr": { "type": "string", "maxLength": 128 },
+        "referenceId": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["id", "amount", "status"]
+    },
+    "Story": {
+      "title": "Story",
+      "description": "Interactive video/image story drop",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "username": { "type": "string", "maxLength": 128 },
+        "userImage": { "type": "string" },
+        "storyImage": { "type": "string" },
+        "productTitle": { "type": "string", "maxLength": 256 },
+        "productPrice": { "type": "number" },
+        "productId": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["id", "username", "storyImage"]
+    },
+    "PaymentTransaction": {
+      "title": "PaymentTransaction",
+      "description": "Razorpay or UPI payment verification record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "orderId": { "type": "string", "maxLength": 128 },
+        "amount": { "type": "number" },
+        "currency": { "type": "string", "maxLength": 16 },
+        "status": { "type": "string", "maxLength": 64 },
+        "paymentMethod": { "type": "string", "maxLength": 128 },
+        "razorpayPaymentId": { "type": "string", "maxLength": 128 },
+        "razorpayOrderId": { "type": "string", "maxLength": 128 },
+        "razorpaySignature": { "type": "string", "maxLength": 256 },
+        "upiVpa": { "type": "string", "maxLength": 128 },
+        "utr": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["id", "orderId", "amount", "status"]
+    },
+    "LogisticsConfig": {
+      "title": "LogisticsConfig",
+      "description": "Shiprocket and NimbusPost courier credentials, token and auto-label settings",
+      "type": "object",
+      "properties": {
+        "shiprocketEmail": { "type": "string", "maxLength": 256 },
+        "shiprocketToken": { "type": "string", "maxLength": 512 },
+        "shiprocketStatus": { "type": "string", "maxLength": 64 },
+        "shiprocketAutoLabel": { "type": "boolean" },
+        "nimbusPostApiKey": { "type": "string", "maxLength": 256 },
+        "nimbusPostToken": { "type": "string", "maxLength": 512 },
+        "nimbusPostStatus": { "type": "string", "maxLength": 64 },
+        "nimbusPostAutoLabel": { "type": "boolean" },
+        "defaultProvider": { "type": "string", "maxLength": 64 }
+      },
+      "required": ["shiprocketEmail", "defaultProvider"]
+    },
+    "HeroBanner": {
+      "title": "HeroBanner",
+      "description": "Storefront hero carousel banner item",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "headline": { "type": "string", "maxLength": 256 },
+        "subheadline": { "type": "string", "maxLength": 512 },
+        "badge": { "type": "string", "maxLength": 128 },
+        "bgColor": { "type": "string", "maxLength": 128 },
+        "accentColor": { "type": "string", "maxLength": 128 },
+        "image": { "type": "string" },
+        "category": { "type": "string", "maxLength": 128 },
+        "code": { "type": "string", "maxLength": 64 },
+        "isActive": { "type": "boolean" },
+        "clicksCount": { "type": "number" },
+        "impressionsCount": { "type": "number" }
+      },
+      "required": ["id", "headline", "image", "category", "code"]
+    },
+    "CreatorProfile": {
+      "title": "CreatorProfile",
+      "description": "Seller Instagram brand identity and handle details",
+      "type": "object",
+      "properties": {
+        "brandName": { "type": "string", "maxLength": 256 },
+        "handle": { "type": "string", "maxLength": 128 },
+        "avatar": { "type": "string" },
+        "bio": { "type": "string", "maxLength": 512 },
+        "followersCount": { "type": "string", "maxLength": 64 },
+        "isVerified": { "type": "boolean" }
+      },
+      "required": ["brandName", "handle"]
+    },
+    "Category": {
+      "title": "Category",
+      "description": "Dynamic store apparel category taxonomy with custom seller categories",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 128 },
+        "count": { "type": "string", "maxLength": 64 },
+        "icon": { "type": "string", "maxLength": 64 },
+        "image": { "type": "string" },
+        "department": { "type": "string", "maxLength": 64 },
+        "isCustom": { "type": "boolean" },
+        "createdAt": { "type": "string", "maxLength": 128 }
+      },
+      "required": ["id", "name"]
+    },
+    "SupportChat": {
+      "title": "SupportChat",
+      "description": "In-app live customer support chat conversation and messages",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "userName": { "type": "string", "maxLength": 256 },
+        "userPhone": { "type": "string", "maxLength": 64 },
+        "lastMessage": { "type": "string", "maxLength": 4096 },
+        "status": { "type": "string", "maxLength": 64 },
+        "messages": { "type": "array" }
+      },
+      "required": ["id", "lastMessage", "status"]
+    }
+  },
+  "firestore": {
+    "/products/{productId}": {
+      "schema": { "$ref": "Product" },
+      "description": "Store apparel products and catalog items"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "Order" },
+      "description": "Customer orders with live tracking steps and payment info"
+    },
+    "/users/{userId}": {
+      "schema": { "$ref": "UserProfile" },
+      "description": "User profiles and account settings"
+    },
+    "/users/{userId}/addresses/{addressId}": {
+      "schema": { "$ref": "Address" },
+      "description": "Saved delivery addresses for user"
+    },
+    "/users/{userId}/wishlist/{docId}": {
+      "schema": { "type": "object" },
+      "description": "Saved user wishlist items"
+    },
+    "/seller_settings/{settingId}": {
+      "schema": { "type": "object" },
+      "description": "Seller store configurations, bank details, and payout settings"
+    },
+    "/payouts/{payoutId}": {
+      "schema": { "$ref": "PayoutRecord" },
+      "description": "Seller payout settlements and ledger history"
+    },
+    "/stories/{storyId}": {
+      "schema": { "$ref": "Story" },
+      "description": "Visual promotional stories and drops"
+    },
+    "/banners/{bannerId}": {
+      "schema": { "$ref": "HeroBanner" },
+      "description": "Homepage hero promotional banners"
+    },
+    "/payments/{paymentId}": {
+      "schema": { "$ref": "PaymentTransaction" },
+      "description": "Razorpay and UPI payment gateway logs"
+    },
+    "/categories/{categoryId}": {
+      "schema": { "$ref": "Category" },
+      "description": "Dynamic store categories and custom seller created taxonomy"
+    },
+    "/support_chats/{chatId}": {
+      "schema": { "$ref": "SupportChat" },
+      "description": "In-app live customer support chat conversation and messages"
+    }
+  }
+}

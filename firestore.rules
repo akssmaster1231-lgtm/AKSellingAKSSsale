@@ -1,0 +1,115 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email in [
+          'akyadavprintaksellig@gmail.com',
+          'support.akselling@gmail.com',
+          'akselling@gmail.com'
+        ] || (
+          request.auth.token.email != null && 
+          request.auth.token.email.matches('.*@akselling\\.com')
+        )
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128;
+    }
+
+    // 1. Connection test & system health
+    match /test/{docId} {
+      allow read, write: if true;
+    }
+    match /system/{docId} {
+      allow read, write: if true;
+    }
+
+    // 2. Products Catalog: Publicly readable; writes protected
+    match /products/{productId} {
+      allow read: if true;
+      allow write: if isAdmin() || isSignedIn();
+    }
+
+    // 3. Orders Collection: Created during checkout, updated by tracking & seller
+    match /orders/{orderId} {
+      allow read: if true;
+      allow create: if true;
+      allow update: if true;
+      allow delete: if isAdmin();
+    }
+
+    // 4. User Profiles & Sub-collections (wishlist, addresses)
+    match /users/{userId} {
+      allow read, write: if isOwner(userId) || isAdmin();
+
+      // Saved delivery addresses
+      match /addresses/{addressId} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
+
+      // Wishlist items
+      match /wishlist/{wishId} {
+        allow read, write: if isOwner(userId) || isAdmin();
+      }
+    }
+
+    // 5. Seller Settings, Bank Details & Brand Identity
+    match /seller_settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin() || isSignedIn();
+    }
+
+    // 6. Payout Records & Bank Withdrawals
+    match /payouts/{payoutId} {
+      allow read, write: if isAdmin() || isSignedIn();
+    }
+
+    // 7. Stories & Promotional Drops
+    match /stories/{storyId} {
+      allow read: if true;
+      allow write: if isAdmin() || isSignedIn();
+    }
+
+    // 8. Hero Carousel Banners (Permanent Storefront Promotions)
+    match /banners/{bannerId} {
+      allow read: if true;
+      allow write: if isAdmin() || isSignedIn();
+    }
+
+    // 9. Payment Transactions & Razorpay/UPI logs
+    match /payments/{paymentId} {
+      allow read, write: if true;
+    }
+
+    // 10. Automated Email Notifications Logs & Triggers
+    match /email_notifications/{noteId} {
+      allow read, write: if true;
+    }
+
+    // 11. Customer Support Tickets & In-App Live Chats
+    match /support_tickets/{ticketId} {
+      allow read, write: if true;
+    }
+    match /support_chats/{chatId} {
+      allow read, write: if true;
+    }
+
+    // 12. Custom Categories & Taxonomy
+    match /categories/{categoryId} {
+      allow read: if true;
+      allow write: if isAdmin() || isSignedIn();
+    }
+  }
+}
