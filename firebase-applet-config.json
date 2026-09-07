@@ -1,12 +1,12 @@
 {
   "projectId": "akselling-55c89",
-  "appId": "1:640460663836:web:a3391db91f047f7a1843d9",
+  "appId": "1:640460663836:web:2d99d323a0fa2c291843d9",
   "apiKey": "AIzaSyDHVhMxpF3F4yJAufzn2NnJmxxYsNY0KWg",
   "authDomain": "akselling-55c89.firebaseapp.com",
-  "firestoreDatabaseId": "(default)",
+  "firestoreDatabaseId": "ai-studio-akyadavprint123-19dd6e1d-2f97-4f8f-8b5b-e14584fa2011",
   "storageBucket": "akselling-55c89.firebasestorage.app",
   "messagingSenderId": "640460663836",
-  "measurementId": "G-X3MBKNYH86",
-  "oAuthClientId": "",
+  "measurementId": "",
+  "oAuthClientId": "640460663836-18qolf8r2002g3hfc80nofe6qlid4i29.apps.googleusercontent.com",
   "recaptchaSiteKey": ""
 }
