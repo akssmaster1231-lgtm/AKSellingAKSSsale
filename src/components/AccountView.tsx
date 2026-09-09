@@ -581,7 +581,7 @@ export const AccountView: React.FC<AccountViewProps> = ({
       </div>
 
       {/* ================= 4. SECURE STORE OWNER & SUPPLIER PORTAL (STORE ADMIN ONLY) ================= */}
-      {(isOwnerUser(firebaseUser) || isOwnerSessionAuthorized() || isOwnerModeActive) && (
+      
         <div className={`rounded-2xl border transition-all overflow-hidden ${
           isOwnerModeActive 
             ? 'bg-gradient-to-r from-emerald-50/90 via-teal-50/60 to-white border-emerald-300 shadow-sm ring-1 ring-emerald-500/20' 
@@ -661,11 +661,9 @@ export const AccountView: React.FC<AccountViewProps> = ({
                   </span>
                   <ChevronRight className="w-4 h-4 text-slate-400 group-hover:translate-x-0.5 transition-all" />
                 </div>
-              )}
             </div>
-          </div>
-        </div>
-      )}
+          
+        
 
       {/* ================= 5. PROMINENT LOGOUT BUTTON (E-COMMERCE STYLE) ================= */}
       {firebaseUser ? (
